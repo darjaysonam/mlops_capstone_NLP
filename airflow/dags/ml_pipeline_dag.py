@@ -16,10 +16,12 @@ Airflow DAG for ML pipeline
 """
 import os
 import sys
+from datetime import datetime
+
+from airflow.operators.bash import BashOperator
+
 import airflow
 from airflow import DAG
-from airflow.operators.bash import BashOperator
-from datetime import datetime
 
 default_args = {"owner": "mlops", "start_date": datetime(2024, 1, 1)}
 

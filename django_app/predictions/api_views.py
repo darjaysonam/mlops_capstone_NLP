@@ -1,16 +1,18 @@
 import os
 import sys
-import airflow
 
-from rest_framework import viewsets, permissions, status
-from rest_framework.response import Response
+from rest_framework import permissions, status, viewsets
 from rest_framework.decorators import action
+from rest_framework.response import Response
+
+import airflow
 
 # Add project root to path
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../"))
 sys.path.append(BASE_DIR)
 
 from src.nlp.inference import ModelService
+
 from .models import Prediction
 from .serializers import PredictionSerializer
 

@@ -1,0 +1,9 @@
+
+DBSCAN Clustering Insights:
+
+- Identified core clusters and noise points.
+- Noise points may represent anomalies or rare cases.
+
+Business Insight:
+Outliers may represent rare disease patterns or data irregularities.
+Useful for anomaly detection in healthcare diagnostics.

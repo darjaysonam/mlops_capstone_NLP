@@ -8,8 +8,8 @@ os.environ["HF_HOME"] = "D:/hf_cache"
 
 import torch
 import torch.nn as nn
-from transformers import pipeline
 from sentence_transformers import SentenceTransformer
+from transformers import pipeline
 
 # -------------------------------------------------
 # MiniLM Embedder

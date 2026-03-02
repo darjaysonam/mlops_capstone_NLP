@@ -2,8 +2,8 @@
 BERT model for medical report classification
 """
 
-from transformers import BertModel
 import torch.nn as nn
+from transformers import BertModel
 
 
 class BertClassifier(nn.Module):

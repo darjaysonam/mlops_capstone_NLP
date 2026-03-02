@@ -1,0 +1,10 @@
+
+KMeans Clustering Insights:
+
+- Cluster 0 represents high-density feature patterns.
+- Cluster 1 represents moderate feature distribution.
+- Cluster 2 represents lower intensity profiles.
+
+Business Insight:
+Clusters may represent different patient risk categories.
+High-value clusters can guide targeted medical interventions.

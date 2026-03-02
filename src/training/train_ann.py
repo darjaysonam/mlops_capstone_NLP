@@ -12,18 +12,19 @@ ANN Training Script (Phase 2 - 2.5)
 - Plots training curves
 """
 
+import matplotlib.pyplot as plt
+import numpy as np
 import torch
 import torch.nn as nn
 import torch.optim as optim
+from sklearn.metrics import (f1_score, precision_score, recall_score,
+                             roc_auc_score)
 from torch.utils.data import DataLoader, random_split
-import numpy as np
-import matplotlib.pyplot as plt
-from sklearn.metrics import f1_score, precision_score, recall_score, roc_auc_score
 from tqdm import tqdm
 
-from src.models.cnn_model import ChestXrayCNN
-from src.models.ann_model import ANNClassifier
 from src.data.data_loader import ChestXrayDataset
+from src.models.ann_model import ANNClassifier
+from src.models.cnn_model import ChestXrayCNN
 
 # -------------------------------------------------
 # Feature Extraction using trained CNN

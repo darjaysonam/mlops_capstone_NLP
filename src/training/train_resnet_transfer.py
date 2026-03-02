@@ -3,12 +3,13 @@ Transfer Learning Training Script
 Uses ResNetTransfer model from models/
 """
 
+import matplotlib.pyplot as plt
 import torch
 import torch.nn as nn
 import torch.optim as optim
+from sklearn.metrics import (f1_score, precision_score, recall_score,
+                             roc_auc_score)
 from torch.utils.data import DataLoader, random_split
-import matplotlib.pyplot as plt
-from sklearn.metrics import f1_score, precision_score, recall_score, roc_auc_score
 
 from src.data.data_loader import ChestXrayDataset
 from src.models.resnet_model import ResNetTransfer

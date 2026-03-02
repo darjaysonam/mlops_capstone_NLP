@@ -1,14 +1,15 @@
-import os
 import argparse
+import os
+
+import matplotlib.pyplot as plt
+import mlflow
+import mlflow.pytorch
 import numpy as np
 import torch
 import torch.nn as nn
 import torch.optim as optim
+from sklearn.metrics import confusion_matrix, f1_score
 from torch.utils.data import DataLoader, TensorDataset
-from sklearn.metrics import f1_score, confusion_matrix
-import matplotlib.pyplot as plt
-import mlflow
-import mlflow.pytorch
 
 # -----------------------------
 # Argument Parser (for MLflow Projects compatibility)

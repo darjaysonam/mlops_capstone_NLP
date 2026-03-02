@@ -6,15 +6,16 @@ Includes:
 - Prometheus monitoring
 """
 
-from fastapi import FastAPI, UploadFile, File
-from fastapi.responses import JSONResponse
-import torch
-from PIL import Image
 import io
-import torchvision.transforms as transforms
 
-from src.serving.model_loader import load_model
+import torch
+import torchvision.transforms as transforms
+from fastapi import FastAPI, File, UploadFile
+from fastapi.responses import JSONResponse
+from PIL import Image
+
 from src.monitoring.metrics_collector import REQUEST_COUNT
+from src.serving.model_loader import load_model
 
 # ───────────────────────────────────────────────
 # Initialize FastAPI App

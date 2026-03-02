@@ -6,9 +6,11 @@ Evaluation Script
 - Optional comparison with zero-shot model
 """
 
-import torch
 import numpy as np
-from src.nlp.models import MiniLMEmbedder, MultiLabelNLPClassifier, load_zero_shot
+import torch
+
+from src.nlp.models import (MiniLMEmbedder, MultiLabelNLPClassifier,
+                            load_zero_shot)
 
 # -------------------------------------------------
 # Target Labels (Must Match training.py)

@@ -1,6 +1,7 @@
-import pandas as pd
 import os
 import shutil
+
+import pandas as pd
 
 CSV_PATH = "data/raw/Data_Entry_2017_v2020.csv"
 IMAGE_DIR = "data/raw/images"

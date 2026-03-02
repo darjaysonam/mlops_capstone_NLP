@@ -4,6 +4,7 @@ Run with: pytest tests/ -v
 """
 
 import torch
+
 from src.models.cnn_model import ChestXrayCNN
 
 

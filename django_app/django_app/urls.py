@@ -16,10 +16,10 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path, include
-from rest_framework.routers import DefaultRouter
-from predictions.api_views import PredictionViewSet
+from django.urls import include, path
 from predictions import views
+from predictions.api_views import PredictionViewSet
+from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
 router.register(r"api/predictions", PredictionViewSet, basename="prediction")

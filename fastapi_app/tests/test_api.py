@@ -5,8 +5,8 @@ import sys
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.append(BASE_DIR)
 
-from main import app
 from fastapi.testclient import TestClient
+from main import app
 
 client = TestClient(app)
 

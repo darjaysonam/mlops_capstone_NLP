@@ -1,6 +1,7 @@
-import streamlit as st
 import os
 import sys
+
+import streamlit as st
 
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../"))
 sys.path.append(BASE_DIR)

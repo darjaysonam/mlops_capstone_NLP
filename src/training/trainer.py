@@ -11,14 +11,14 @@ import torch
 torch.set_num_threads(4)
 
 import mlflow
+import numpy as np
 import torch.nn as nn
 import torch.optim as optim
-from torch.utils.data import DataLoader, random_split
-import numpy as np
 from sklearn.metrics import f1_score, precision_score, recall_score
+from torch.utils.data import DataLoader, random_split
 
-from src.models.cnn_model import ChestXrayCNN
 from src.data.data_loader import ChestXrayDataset
+from src.models.cnn_model import ChestXrayCNN
 
 
 def train_cnn():

@@ -7,6 +7,7 @@ Test script to:
 
 import matplotlib.pyplot as plt
 import torch
+
 from src.data.data_loader import ChestXrayDataset
 
 # Load dataset
