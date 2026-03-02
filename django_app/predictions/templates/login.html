@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <style>
+        body {
+            font-family: Arial;
+            margin: 120px auto;
+            width: 320px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 12px;
+        }
+
+        button {
+            width: 100%;
+            padding: 8px;
+            background: #007bff;
+            border: none;
+            color: white;
+        }
+
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Login</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    <input name="username" placeholder="Username">
+    <input name="password" type="password" placeholder="Password">
+    <button type="submit">Login</button>
+</form>
+
+{% for message in messages %}
+    <p class="error">{{ message }}</p>
+{% endfor %}
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Radiology Disease Predictor</title>
+</head>
+<body>
+
+    <h1>Radiology Disease Prediction (Flask)</h1>
+
+    <form method="POST">
+        <textarea name="text" rows="6" cols="80"
+        placeholder="Enter radiology narrative here..."></textarea>
+        <br><br>
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if predictions %}
+        <h2>Results:</h2>
+        <table border="1" cellpadding="5">
+            <tr>
+                <th>Disease</th>
+                <th>Probability</th>
+                <th>Predicted</th>
+            </tr>
+
+            {% for item in predictions %}
+            <tr>
+                <td>{{ item.label }}</td>
+                <td>{{ item.probability }}</td>
+                <td>{{ item.predicted }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+
+</body>
+</html>

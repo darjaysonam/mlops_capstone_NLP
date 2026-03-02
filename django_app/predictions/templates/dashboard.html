@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Django Prediction Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f4f6f9;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+        }
+
+        button {
+            padding: 8px 15px;
+            background-color: #007bff;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: white;
+        }
+
+        th, td {
+            padding: 8px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .positive {
+            background-color: #d4edda;
+        }
+
+        .negative {
+            background-color: #f8d7da;
+        }
+
+        .top-bar {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        .history-box {
+            background: white;
+            padding: 15px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Django Prediction Dashboard</h2>
+
+<div class="top-bar">
+    Logged in as <strong>{{ request.user.username }}</strong>
+    |
+    <a href="{% url 'logout' %}" style="color: red; text-decoration: none;">
+        Logout
+    </a>
+</div>
+
+<form method="POST">
+    {% csrf_token %}
+    <textarea name="text" rows="5"
+        placeholder="Enter radiology narrative here..."></textarea>
+    <br><br>
+    <button type="submit">Predict</button>
+</form>
+
+{% if predictions %}
+<h3>Current Prediction</h3>
+
+<table>
+    <tr>
+        <th>Disease</th>
+        <th>Probability</th>
+        <th>Predicted</th>
+    </tr>
+
+    {% for item in predictions %}
+    <tr class="{% if item.predicted %}positive{% else %}negative{% endif %}">
+        <td>{{ item.label }}</td>
+        <td>{{ item.probability|floatformat:3 }}</td>
+        <td>{{ item.predicted }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endif %}
+
+<div class="history-box">
+<h3>Prediction History</h3>
+
+{% for entry in history %}
+    <hr>
+    <p><strong>Input:</strong> {{ entry.input_text }}</p>
+    <p><strong>Time:</strong> {{ entry.created_at }}</p>
+
+    <table>
+        <tr>
+            <th>Disease</th>
+            <th>Probability</th>
+            <th>Predicted</th>
+        </tr>
+
+        {% for item in entry.result_json %}
+        <tr class="{% if item.predicted %}positive{% else %}negative{% endif %}">
+            <td>{{ item.label }}</td>
+            <td>{{ item.probability|floatformat:3 }}</td>
+            <td>{{ item.predicted }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+{% empty %}
+    <p>No prediction history yet.</p>
+{% endfor %}
+
+</div>
+
+</body>
+</html>

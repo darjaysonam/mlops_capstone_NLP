@@ -1,7 +1,18 @@
-FROM python:3.11-slim
+# ───────────────────────────────────────────────
+# MLflow Tracking Server Container
+# ───────────────────────────────────────────────
 
-RUN pip install --no-cache-dir mlflow==2.9.0 psycopg2-binary boto3
+FROM python:3.10-slim
 
+# Prevent Python from writing pyc files
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
+# Install MLflow and PostgreSQL driver
+RUN pip install --no-cache-dir mlflow psycopg2-binary
+
+# Expose MLflow port
 EXPOSE 5000
 
-CMD ["mlflow", "server", "--host", "0.0.0.0", "--port", "5000"]
+# Default command (overridden by docker-compose)
+CMD ["mlflow", "server"]

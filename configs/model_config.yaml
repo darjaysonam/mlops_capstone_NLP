@@ -1,0 +1,4 @@
+model:
+  image_model: resnet18
+  text_model: distilbert
+  num_classes: 14
