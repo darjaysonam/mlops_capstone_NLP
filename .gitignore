@@ -1,4 +1,71 @@
-.venv
-venv
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# Virtual Environments
+
 venv/
+.env/
+.env
+.env.*
 .venv/
+
+# Jupyter / Cache
+.ipynb_checkpoints/
+.pytest_cache/
+.mypy_cache/
+coverage.xml
+htmlcov/
+
+# Logs
+*.log
+logs/
+
+# MLflow
+mlruns/
+mlartifacts/
+*.db
+
+# Model Artifacts
+*.pt
+*.pth
+*.ckpt
+*.onnx
+*.joblib
+*.pkl
+*.h5
+*.bin
+
+# Large Data Files
+data/
+datasets/
+*.csv
+*.zip
+*.tar
+*.gz
+*.7z
+
+# Docker
+docker_data/
+postgres_data/
+mlflow_artifacts/
+*.tar
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Temporary
+tmp/
+temp/
