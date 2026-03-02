@@ -7,6 +7,7 @@ CNN Training with:
 """
 
 import torch
+
 torch.set_num_threads(4)
 
 import mlflow
@@ -27,32 +28,20 @@ def train_cnn():
     # ─────────────────────────────────────────────
 
     full_dataset = ChestXrayDataset(
-        csv_file="data/processed/subset.csv",
-        image_dir="data/processed/images"
+        csv_file="data/processed/subset.csv", image_dir="data/processed/images"
     )
 
     # 80/20 split
     train_size = int(0.8 * len(full_dataset))
     val_size = len(full_dataset) - train_size
 
-    train_dataset, val_dataset = random_split(
-        full_dataset,
-        [train_size, val_size]
-    )
+    train_dataset, val_dataset = random_split(full_dataset, [train_size, val_size])
 
     train_loader = DataLoader(
-        train_dataset,
-        batch_size=4,     # safer for 8GB RAM
-        shuffle=True,
-        num_workers=0
+        train_dataset, batch_size=4, shuffle=True, num_workers=0  # safer for 8GB RAM
     )
 
-    val_loader = DataLoader(
-        val_dataset,
-        batch_size=4,
-        shuffle=False,
-        num_workers=0
-    )
+    val_loader = DataLoader(val_dataset, batch_size=4, shuffle=False, num_workers=0)
 
     model = ChestXrayCNN(num_classes=14)
 
@@ -132,7 +121,9 @@ def train_cnn():
             f1_micro = f1_score(all_true, all_preds, average="micro", zero_division=0)
             f1_macro = f1_score(all_true, all_preds, average="macro", zero_division=0)
 
-            precision = precision_score(all_true, all_preds, average="micro", zero_division=0)
+            precision = precision_score(
+                all_true, all_preds, average="micro", zero_division=0
+            )
             recall = recall_score(all_true, all_preds, average="micro", zero_division=0)
 
             print(f"\nEpoch {epoch+1}")
@@ -152,6 +143,7 @@ def train_cnn():
                 print("Best model saved.")
 
     print("\nTraining completed.")
+
 
 if __name__ == "__main__":
     train_cnn()

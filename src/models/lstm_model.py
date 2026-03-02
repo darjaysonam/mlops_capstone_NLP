@@ -13,12 +13,7 @@ class BiLSTMClassifier(nn.Module):
 
         self.embedding = nn.Embedding(vocab_size, embed_dim)
 
-        self.lstm = nn.LSTM(
-            embed_dim,
-            hidden_dim,
-            batch_first=True,
-            bidirectional=True
-        )
+        self.lstm = nn.LSTM(embed_dim, hidden_dim, batch_first=True, bidirectional=True)
 
         self.fc = nn.Linear(hidden_dim * 2, num_classes)
         self.dropout = nn.Dropout(0.3)

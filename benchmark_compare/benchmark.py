@@ -6,20 +6,19 @@ import numpy as np
 # Config
 # -------------------------
 MLFLOW_URL = "http://127.0.0.1:5001/invocations"
-FASTAPI_URL = "http://127.0.0.1:8000/predict"   # change if needed
+FASTAPI_URL = "http://127.0.0.1:8000/predict"  # change if needed
 
 N_REQUESTS = 100
 
 payload_mlflow = {
     "dataframe_split": {
         "columns": [f"f{i}" for i in range(1, 21)],
-        "data": [np.random.rand(20).tolist()]
+        "data": [np.random.rand(20).tolist()],
     }
 }
 
-payload_fastapi = {
-    "inputs": np.random.rand(20).tolist()
-}
+payload_fastapi = {"inputs": np.random.rand(20).tolist()}
+
 
 # -------------------------
 # Benchmark Function

@@ -48,19 +48,14 @@ def dashboard(request):
             predictions = model_service.predict(text)
 
             Prediction.objects.create(
-                user=request.user,
-                input_text=text,
-                result_json=predictions
+                user=request.user, input_text=text, result_json=predictions
             )
 
-    history = Prediction.objects.filter(
-        user=request.user
-    ).order_by("-created_at")
+    history = Prediction.objects.filter(user=request.user).order_by("-created_at")
 
-    return render(request, "dashboard.html", {
-        "predictions": predictions,
-        "history": history
-    })
+    return render(
+        request, "dashboard.html", {"predictions": predictions, "history": history}
+    )
 
 
 @login_required

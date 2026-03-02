@@ -23,8 +23,7 @@ def train_resnet(mode="frozen"):
     print(f"\nTraining ResNet18 - Mode: {mode}")
 
     full_dataset = ChestXrayDataset(
-        csv_file="data/processed/subset.csv",
-        image_dir="data/processed/images"
+        csv_file="data/processed/subset.csv", image_dir="data/processed/images"
     )
 
     train_size = int(0.8 * len(full_dataset))
@@ -41,15 +40,12 @@ def train_resnet(mode="frozen"):
 
     optimizer = optim.Adam(
         filter(lambda p: p.requires_grad, model.parameters()),
-        lr = 1e-4 if mode == "finetune" else 5e-4,
-        weight_decay=1e-4
+        lr=1e-4 if mode == "finetune" else 5e-4,
+        weight_decay=1e-4,
     )
 
     scheduler = optim.lr_scheduler.ReduceLROnPlateau(
-        optimizer,
-        mode='min',
-        patience=3,
-        factor=0.5
+        optimizer, mode="min", patience=3, factor=0.5
     )
 
     epochs = 15

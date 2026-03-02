@@ -11,8 +11,7 @@ from src.data.data_loader import ChestXrayDataset
 
 # Load dataset
 dataset = ChestXrayDataset(
-    csv_file="data/processed/subset.csv",
-    image_dir="data/processed/images"
+    csv_file="data/processed/subset.csv", image_dir="data/processed/images"
 )
 
 # Choose sample index

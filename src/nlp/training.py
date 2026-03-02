@@ -10,7 +10,6 @@ import matplotlib.pyplot as plt
 import mlflow
 import mlflow.pytorch
 
-
 # -----------------------------
 # Argument Parser (for MLflow Projects compatibility)
 # -----------------------------
@@ -36,7 +35,9 @@ train_size = int(0.8 * len(X))
 X_train, X_val = X[:train_size], X[train_size:]
 y_train, y_val = y[:train_size], y[train_size:]
 
-train_loader = DataLoader(TensorDataset(X_train, y_train), batch_size=BATCH_SIZE, shuffle=True)
+train_loader = DataLoader(
+    TensorDataset(X_train, y_train), batch_size=BATCH_SIZE, shuffle=True
+)
 val_loader = DataLoader(TensorDataset(X_val, y_val), batch_size=BATCH_SIZE)
 
 
@@ -148,8 +149,7 @@ with mlflow.start_run():
     # -----------------------------
     # Confusion Matrix Artifact
     # -----------------------------
-    cm = confusion_matrix(all_labels.argmax(axis=1),
-                          all_preds.argmax(axis=1))
+    cm = confusion_matrix(all_labels.argmax(axis=1), all_preds.argmax(axis=1))
 
     plt.figure(figsize=(6, 6))
     plt.imshow(cm, cmap="Blues")
@@ -166,10 +166,6 @@ with mlflow.start_run():
     # -----------------------------
     # Log Model Properly
     # -----------------------------
-    mlflow.pytorch.log_model(
-        model,
-        "model",
-        registered_model_name="MultiLabelNLPModel"
-    )
+    mlflow.pytorch.log_model(model, "model", registered_model_name="MultiLabelNLPModel")
 
 print("Training Complete ✔")

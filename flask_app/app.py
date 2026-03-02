@@ -16,7 +16,6 @@ sys.path.append(BASE_DIR)
 
 from src.nlp.inference import ModelService
 
-
 # -------------------------------------------------
 # Flask App Setup
 # -------------------------------------------------
@@ -33,14 +32,14 @@ model_service = ModelService()
 # -------------------------------------------------
 
 logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s - %(levelname)s - %(message)s"
+    level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
 )
 
 
 # -------------------------------------------------
 # JWT Authentication Decorator
 # -------------------------------------------------
+
 
 def token_required(f):
     @wraps(f)
@@ -49,19 +48,16 @@ def token_required(f):
         auth_header = request.headers.get("Authorization")
 
         if not auth_header:
-            return jsonify({
-                "status": "error",
-                "message": "Token is missing"
-            }), 401
+            return jsonify({"status": "error", "message": "Token is missing"}), 401
 
         try:
             token = auth_header.split(" ")[1]
             jwt.decode(token, app.config["SECRET_KEY"], algorithms=["HS256"])
         except Exception:
-            return jsonify({
-                "status": "error",
-                "message": "Invalid or expired token"
-            }), 401
+            return (
+                jsonify({"status": "error", "message": "Invalid or expired token"}),
+                401,
+            )
 
         return f(*args, **kwargs)
 
@@ -72,70 +68,56 @@ def token_required(f):
 # Login Route (POST)
 # -------------------------------------------------
 
+
 @app.route("/login", methods=["POST"])
 def login():
 
     if not request.is_json:
-        return jsonify({
-            "status": "error",
-            "message": "Request must be JSON"
-        }), 400
+        return jsonify({"status": "error", "message": "Request must be JSON"}), 400
 
     data = request.get_json()
 
     if data.get("username") != "admin" or data.get("password") != "admin":
-        return jsonify({
-            "status": "error",
-            "message": "Invalid credentials"
-        }), 401
+        return jsonify({"status": "error", "message": "Invalid credentials"}), 401
 
-    token = jwt.encode({
-        "user": data["username"],
-        "exp": datetime.utcnow() + timedelta(minutes=60)
-    }, app.config["SECRET_KEY"], algorithm="HS256")
+    token = jwt.encode(
+        {"user": data["username"], "exp": datetime.utcnow() + timedelta(minutes=60)},
+        app.config["SECRET_KEY"],
+        algorithm="HS256",
+    )
 
-    return jsonify({
-        "status": "success",
-        "token": token
-    }), 200
+    return jsonify({"status": "success", "token": token}), 200
 
 
 # -------------------------------------------------
 # REST Prediction Endpoint (Protected)
 # -------------------------------------------------
 
+
 @app.route("/predict", methods=["POST"])
 @token_required
 def predict():
 
     if not request.is_json:
-        return jsonify({
-            "status": "error",
-            "message": "Request must be JSON"
-        }), 400
+        return jsonify({"status": "error", "message": "Request must be JSON"}), 400
 
     data = request.get_json()
     text = data.get("text")
 
     if not text or not isinstance(text, str):
-        return jsonify({
-            "status": "error",
-            "message": "Invalid input text"
-        }), 400
+        return jsonify({"status": "error", "message": "Invalid input text"}), 400
 
     logging.info("Prediction request received")
 
     predictions = model_service.predict(text)
 
-    return jsonify({
-        "status": "success",
-        "predictions": predictions
-    }), 200
+    return jsonify({"status": "success", "predictions": predictions}), 200
 
 
 # -------------------------------------------------
 # HTML Frontend (Jinja2)
 # -------------------------------------------------
+
 
 @app.route("/", methods=["GET", "POST"])
 def home():

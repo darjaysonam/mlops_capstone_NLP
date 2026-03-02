@@ -8,12 +8,7 @@ Evaluation Script
 
 import torch
 import numpy as np
-from src.nlp.models import (
-    MiniLMEmbedder,
-    MultiLabelNLPClassifier,
-    load_zero_shot
-)
-
+from src.nlp.models import MiniLMEmbedder, MultiLabelNLPClassifier, load_zero_shot
 
 # -------------------------------------------------
 # Target Labels (Must Match training.py)
@@ -27,13 +22,14 @@ TARGET_LABELS = [
     "effusion",
     "pleural thickening",
     "pneumothorax",
-    "consolidation"
+    "consolidation",
 ]
 
 
 # -------------------------------------------------
 # Load Trained Model
 # -------------------------------------------------
+
 
 def load_trained_model():
 
@@ -43,10 +39,7 @@ def load_trained_model():
     dummy = embedder.encode(["test"])
     input_dim = dummy.shape[1]
 
-    model = MultiLabelNLPClassifier(
-        input_dim=input_dim,
-        num_labels=len(TARGET_LABELS)
-    )
+    model = MultiLabelNLPClassifier(input_dim=input_dim, num_labels=len(TARGET_LABELS))
 
     model.load_state_dict(torch.load("best_multilabel_nlp.pth"))
     model.eval()
@@ -57,6 +50,7 @@ def load_trained_model():
 # -------------------------------------------------
 # Predict Using Trained Model
 # -------------------------------------------------
+
 
 def predict_with_trained_model(text):
 
@@ -82,15 +76,12 @@ def predict_with_trained_model(text):
 # Compare with Zero-Shot
 # -------------------------------------------------
 
+
 def compare_with_zero_shot(text):
 
     classifier = load_zero_shot()
 
-    result = classifier(
-        text,
-        TARGET_LABELS,
-        multi_label=True
-    )
+    result = classifier(text, TARGET_LABELS, multi_label=True)
 
     print("\n🤖 Zero-Shot Predictions:")
     for label, score in zip(result["labels"], result["scores"]):

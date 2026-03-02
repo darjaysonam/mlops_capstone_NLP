@@ -9,10 +9,10 @@ import torch
 import torch.nn as nn
 from sentence_transformers import SentenceTransformer
 
-
 # -------------------------------------------------
 # MultiLabelNLPClassifier
 # -------------------------------------------------
+
 
 class MultiLabelNLPClassifier(nn.Module):
     def __init__(self, input_dim, num_labels):
@@ -22,7 +22,7 @@ class MultiLabelNLPClassifier(nn.Module):
             nn.Linear(input_dim, 256),
             nn.ReLU(),
             nn.Dropout(0.3),
-            nn.Linear(256, num_labels)
+            nn.Linear(256, num_labels),
         )
 
     def forward(self, x):
@@ -32,6 +32,7 @@ class MultiLabelNLPClassifier(nn.Module):
 # -------------------------------------------------
 # Model Service
 # -------------------------------------------------
+
 
 class ModelService:
 
@@ -45,7 +46,7 @@ class ModelService:
             "effusion",
             "pleural thickening",
             "pneumothorax",
-            "consolidation"
+            "consolidation",
         ]
 
         self.threshold = 0.4
@@ -55,17 +56,13 @@ class ModelService:
         BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../"))
         MODEL_PATH = os.path.join(BASE_DIR, "best_multilabel_nlp.pth")
 
-        self.model = MultiLabelNLPClassifier(
-            input_dim=384,
-            num_labels=len(self.labels)
-        )
+        self.model = MultiLabelNLPClassifier(input_dim=384, num_labels=len(self.labels))
 
         self.model.load_state_dict(
             torch.load(MODEL_PATH, map_location=torch.device("cpu"))
         )
 
         self.model.eval()
-
 
     # -------------------------------------------------
     # Improved Negation Handling
@@ -81,7 +78,7 @@ class ModelService:
             "absent",
             "negative for",
             "no evidence of",
-            "free of"
+            "free of",
         ]
 
         for neg in NEGATION_TERMS:
@@ -105,7 +102,6 @@ class ModelService:
 
         return predictions
 
-
     # -------------------------------------------------
     # Prediction
     # -------------------------------------------------
@@ -121,11 +117,13 @@ class ModelService:
         predictions = []
 
         for label, prob in zip(self.labels, probs):
-            predictions.append({
-                "label": label,
-                "probability": float(prob),
-                "predicted": bool(prob >= self.threshold)
-            })
+            predictions.append(
+                {
+                    "label": label,
+                    "probability": float(prob),
+                    "predicted": bool(prob >= self.threshold),
+                }
+            )
 
         predictions = self.apply_negation_rule(text, predictions)
 

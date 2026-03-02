@@ -23,7 +23,7 @@ from src.monitoring.metrics_collector import REQUEST_COUNT
 app = FastAPI(
     title="Chest X-ray Diagnosis API",
     description="Predicts disease labels from chest X-ray images",
-    version="1.0"
+    version="1.0",
 )
 
 # ───────────────────────────────────────────────
@@ -39,22 +39,22 @@ model.eval()
 # Image Preprocessing (MUST match training)
 # ───────────────────────────────────────────────
 
-transform = transforms.Compose([
-    transforms.Resize((224, 224)),
-    transforms.ToTensor()
-])
+transform = transforms.Compose([transforms.Resize((224, 224)), transforms.ToTensor()])
 
 # ───────────────────────────────────────────────
 # Health Check Endpoint
 # ───────────────────────────────────────────────
 
+
 @app.get("/")
 def health_check():
     return {"status": "API is running"}
 
+
 # ───────────────────────────────────────────────
 # Prediction Endpoint
 # ───────────────────────────────────────────────
+
 
 @app.post("/predict")
 async def predict(file: UploadFile = File(...)):
@@ -85,18 +85,9 @@ async def predict(file: UploadFile = File(...)):
         # Convert output tensor to list
         predictions = outputs.tolist()
 
-        return JSONResponse(
-            content={
-                "success": True,
-                "predictions": predictions
-            }
-        )
+        return JSONResponse(content={"success": True, "predictions": predictions})
 
     except Exception as e:
         return JSONResponse(
-            content={
-                "success": False,
-                "error": str(e)
-            },
-            status_code=500
+            content={"success": False, "error": str(e)}, status_code=500
         )

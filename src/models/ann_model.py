@@ -19,7 +19,7 @@ class ANNClassifier(nn.Module):
         hidden2=128,
         activation="relu",
         use_batchnorm=True,
-        dropout=0.5
+        dropout=0.5,
     ):
         super(ANNClassifier, self).__init__()
 

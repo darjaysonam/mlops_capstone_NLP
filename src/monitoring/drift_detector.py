@@ -15,7 +15,4 @@ def detect_drift(reference_data, new_data, threshold=0.05):
 
     drift_detected = p_value < threshold
 
-    return {
-        "p_value": p_value,
-        "drift_detected": drift_detected
-    }
+    return {"p_value": p_value, "drift_detected": drift_detected}

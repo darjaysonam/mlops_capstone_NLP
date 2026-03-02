@@ -25,10 +25,10 @@ from src.models.cnn_model import ChestXrayCNN
 from src.models.ann_model import ANNClassifier
 from src.data.data_loader import ChestXrayDataset
 
-
 # -------------------------------------------------
 # Feature Extraction using trained CNN
 # -------------------------------------------------
+
 
 def extract_features(cnn_model, dataloader):
     cnn_model.eval()
@@ -57,22 +57,19 @@ def extract_features(cnn_model, dataloader):
 # Training Function
 # -------------------------------------------------
 
+
 def train_ann():
 
     print("Loading dataset...")
 
     full_dataset = ChestXrayDataset(
-        csv_file="data/processed/subset.csv",
-        image_dir="data/processed/images"
+        csv_file="data/processed/subset.csv", image_dir="data/processed/images"
     )
 
     train_size = int(0.8 * len(full_dataset))
     val_size = len(full_dataset) - train_size
 
-    train_dataset, val_dataset = random_split(
-        full_dataset,
-        [train_size, val_size]
-    )
+    train_dataset, val_dataset = random_split(full_dataset, [train_size, val_size])
 
     train_loader = DataLoader(train_dataset, batch_size=4, shuffle=False, num_workers=0)
     val_loader = DataLoader(val_dataset, batch_size=4, shuffle=False, num_workers=0)
@@ -103,24 +100,19 @@ def train_ann():
         input_dim=input_dim,
         hidden1=256,
         hidden2=128,
-        activation="tanh",        # change here for experiments
-        use_batchnorm=True,       # True / False
-        dropout=0.5               # 0.0 to disable
+        activation="tanh",  # change here for experiments
+        use_batchnorm=True,  # True / False
+        dropout=0.5,  # 0.0 to disable
     )
 
     criterion = nn.BCEWithLogitsLoss()
 
     optimizer = optim.Adam(
-        model.parameters(),
-        lr=0.001,
-        weight_decay=1e-4   # L2 regularization
+        model.parameters(), lr=0.001, weight_decay=1e-4  # L2 regularization
     )
 
     scheduler = optim.lr_scheduler.ReduceLROnPlateau(
-        optimizer,
-        mode='min',
-        patience=3,
-        factor=0.5
+        optimizer, mode="min", patience=3, factor=0.5
     )
 
     epochs = 20

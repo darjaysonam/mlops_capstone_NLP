@@ -9,7 +9,6 @@ import matplotlib.pyplot as plt
 import mlflow
 import mlflow.pyfunc
 
-
 # =============================
 # Argument Parsing (MLflow Projects compatible)
 # =============================
@@ -35,15 +34,10 @@ X_train, X_val = X[:train_size], X[train_size:]
 y_train, y_val = y[:train_size], y[train_size:]
 
 train_loader = DataLoader(
-    TensorDataset(X_train, y_train),
-    batch_size=BATCH_SIZE,
-    shuffle=True
+    TensorDataset(X_train, y_train), batch_size=BATCH_SIZE, shuffle=True
 )
 
-val_loader = DataLoader(
-    TensorDataset(X_val, y_val),
-    batch_size=BATCH_SIZE
-)
+val_loader = DataLoader(TensorDataset(X_val, y_val), batch_size=BATCH_SIZE)
 
 
 # =============================
@@ -143,10 +137,7 @@ for epoch in range(EPOCHS):
 # =============================
 # Confusion Matrix Logging
 # =============================
-cm = confusion_matrix(
-    all_labels.argmax(axis=1),
-    all_preds.argmax(axis=1)
-)
+cm = confusion_matrix(all_labels.argmax(axis=1), all_preds.argmax(axis=1))
 
 plt.figure(figsize=(6, 6))
 plt.imshow(cm)
@@ -169,10 +160,8 @@ class WrappedModel(mlflow.pyfunc.PythonModel):
 
     def predict(self, context, model_input):
         import torch
-        input_tensor = torch.tensor(
-            model_input.values,
-            dtype=torch.float32
-        )
+
+        input_tensor = torch.tensor(model_input.values, dtype=torch.float32)
         with torch.no_grad():
             outputs = self.model(input_tensor)
         return outputs.numpy()
@@ -181,7 +170,7 @@ class WrappedModel(mlflow.pyfunc.PythonModel):
 mlflow.pyfunc.log_model(
     artifact_path="model",
     python_model=WrappedModel(),
-    registered_model_name="MultiLabelNLPModel"
+    registered_model_name="MultiLabelNLPModel",
 )
 
 print("Training complete.")

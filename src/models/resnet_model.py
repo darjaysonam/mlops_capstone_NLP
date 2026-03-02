@@ -21,18 +21,13 @@ class ResNetTransfer(nn.Module):
         super(ResNetTransfer, self).__init__()
 
         # Load pretrained ResNet18
-        self.base_model = models.resnet18(
-            weights=models.ResNet18_Weights.DEFAULT
-        )
+        self.base_model = models.resnet18(weights=models.ResNet18_Weights.DEFAULT)
 
         # Replace final classification layer
         num_features = self.base_model.fc.in_features
 
         self.base_model.fc = nn.Sequential(
-            nn.Linear(num_features, 256),
-            nn.ReLU(),
-            nn.Dropout(0.5),
-            nn.Linear(256, 1)
+            nn.Linear(num_features, 256), nn.ReLU(), nn.Dropout(0.5), nn.Linear(256, 1)
         )
 
         # Freeze or unfreeze layers

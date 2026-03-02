@@ -36,7 +36,7 @@ eval_sample_size = st.slider(
     "Evaluation Sample Size (Performance Metrics)",
     min_value=50,
     max_value=min(500, len(texts)),
-    value=100
+    value=100,
 )
 
 texts_eval = texts[:eval_sample_size]
@@ -48,10 +48,7 @@ labels_eval = labels[:eval_sample_size]
 
 st.subheader("🔄 Generating Predictions...")
 
-embeddings = model_service.embedder.encode(
-    texts_eval,
-    convert_to_tensor=True
-)
+embeddings = model_service.embedder.encode(texts_eval, convert_to_tensor=True)
 
 with torch.no_grad():
     outputs = model_service.model(embeddings)
@@ -134,14 +131,11 @@ if st.button("Run SHAP Explanation"):
     shap_texts = texts[:shap_sample_size]
 
     shap_embeddings = model_service.embedder.encode(
-        shap_texts,
-        convert_to_tensor=True
+        shap_texts, convert_to_tensor=True
     ).numpy()
 
     shap_label = st.selectbox(
-        "Select Label for SHAP",
-        label_names,
-        key="shap_label_select"
+        "Select Label for SHAP", label_names, key="shap_label_select"
     )
 
     shap_label_idx = label_names.index(shap_label)
@@ -162,20 +156,11 @@ if st.button("Run SHAP Explanation"):
     st.subheader(f"SHAP Summary Plot - {shap_label}")
 
     fig4 = plt.figure()
-    shap.summary_plot(
-        shap_values,
-        shap_embeddings,
-        show=False
-    )
+    shap.summary_plot(shap_values, shap_embeddings, show=False)
     st.pyplot(fig4)
 
     st.subheader(f"SHAP Feature Importance (Bar) - {shap_label}")
 
     fig5 = plt.figure()
-    shap.summary_plot(
-        shap_values,
-        shap_embeddings,
-        plot_type="bar",
-        show=False
-    )
+    shap.summary_plot(shap_values, shap_embeddings, plot_type="bar", show=False)
     st.pyplot(fig5)

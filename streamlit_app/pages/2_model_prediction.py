@@ -11,10 +11,7 @@ st.title("🤖 Disease Prediction")
 
 model_service = ModelService()
 
-text_input = st.text_area(
-    "Enter Radiology Narrative",
-    height=200
-)
+text_input = st.text_area("Enter Radiology Narrative", height=200)
 
 threshold = st.slider("Prediction Threshold", 0.1, 0.9, 0.4)
 
@@ -25,9 +22,7 @@ if st.button("Predict"):
     else:
         predictions = model_service.predict(text_input)
 
-        filtered = [
-            p for p in predictions if p["probability"] >= threshold
-        ]
+        filtered = [p for p in predictions if p["probability"] >= threshold]
 
         st.subheader("Prediction Results")
 

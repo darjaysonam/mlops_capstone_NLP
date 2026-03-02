@@ -23,9 +23,6 @@ df_subset.to_csv("data/processed/subset.csv", index=False)
 
 # Copy images
 for img in df_subset["Image Index"]:
-    shutil.copy(
-        os.path.join(IMAGE_DIR, img),
-        os.path.join(OUTPUT_DIR, img)
-    )
+    shutil.copy(os.path.join(IMAGE_DIR, img), os.path.join(OUTPUT_DIR, img))
 
 print("Subset created successfully.")

@@ -15,8 +15,7 @@ class BertClassifier(nn.Module):
         self.fc = nn.Linear(768, num_classes)
 
     def forward(self, input_ids, attention_mask):
-        outputs = self.bert(input_ids=input_ids,
-                            attention_mask=attention_mask)
+        outputs = self.bert(input_ids=input_ids, attention_mask=attention_mask)
 
         pooled_output = outputs.pooler_output
         output = self.dropout(pooled_output)
