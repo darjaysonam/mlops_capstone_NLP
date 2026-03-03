@@ -1,10 +1,7 @@
 import argparse
-import os
-
 import matplotlib.pyplot as plt
 import mlflow
 import mlflow.pytorch
-import numpy as np
 import torch
 import torch.nn as nn
 import torch.optim as optim

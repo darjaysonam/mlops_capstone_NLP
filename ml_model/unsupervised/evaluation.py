@@ -2,7 +2,6 @@ import json
 import os
 
 import matplotlib.pyplot as plt
-import numpy as np
 import seaborn as sns
 from sklearn.decomposition import PCA
 from sklearn.metrics import davies_bouldin_score, silhouette_score

@@ -7,7 +7,6 @@ Fully parameterized to allow:
 - Optional Dropout
 """
 
-import torch
 import torch.nn as nn
 
 

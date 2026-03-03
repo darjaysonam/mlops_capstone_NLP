@@ -6,7 +6,6 @@ Evaluation Script
 - Optional comparison with zero-shot model
 """
 
-import numpy as np
 import torch
 
 from src.nlp.models import (MiniLMEmbedder, MultiLabelNLPClassifier,

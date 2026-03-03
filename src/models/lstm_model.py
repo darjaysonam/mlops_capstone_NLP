@@ -3,9 +3,7 @@ Bidirectional LSTM for medical report classification
 Lightweight for CPU training
 """
 
-import torch
 import torch.nn as nn
-
 
 class BiLSTMClassifier(nn.Module):
     def __init__(self, vocab_size, embed_dim, hidden_dim, num_classes):

@@ -3,7 +3,6 @@ CNN Model using Transfer Learning (ResNet18)
 CPU friendly version
 """
 
-import torch
 import torch.nn as nn
 import torchvision.models as models
 
