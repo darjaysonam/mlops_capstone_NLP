@@ -37,7 +37,7 @@ def evaluate_model(model, X_train, X_test, y_train, y_test, model_name):
     if y_proba is not None:
         try:
             roc_auc = roc_auc_score(y_test, y_proba, multi_class="ovr")
-        except:
+        except Exception:
             pass
 
     cv_scores = cross_val_score(model, X_train, y_train, cv=5)

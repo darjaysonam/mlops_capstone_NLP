@@ -1,0 +1,2 @@
+Total rows: 7265
+Duplicate rows: 0

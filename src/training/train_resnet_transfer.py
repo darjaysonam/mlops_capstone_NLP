@@ -135,5 +135,5 @@ def train_resnet(mode="frozen"):
 
 
 if __name__ == "__main__":
-    ##train_resnet(mode="frozen")
+    train_resnet(mode="frozen")
     train_resnet(mode="finetune")
