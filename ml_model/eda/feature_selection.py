@@ -33,8 +33,7 @@ class FeatureSelector:
         model.fit(self.X, self.y)
 
         importances = pd.Series(
-            model.feature_importances_,
-            index=self.X.columns
+            model.feature_importances_, index=self.X.columns
         ).sort_values(ascending=False)
 
         plt.figure(figsize=(10, 6))

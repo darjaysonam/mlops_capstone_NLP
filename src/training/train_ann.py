@@ -16,8 +16,7 @@ import matplotlib.pyplot as plt
 import torch
 import torch.nn as nn
 import torch.optim as optim
-from sklearn.metrics import (f1_score, precision_score, recall_score,
-                             roc_auc_score)
+from sklearn.metrics import f1_score, precision_score, recall_score, roc_auc_score
 from torch.utils.data import DataLoader, random_split
 from tqdm import tqdm
 

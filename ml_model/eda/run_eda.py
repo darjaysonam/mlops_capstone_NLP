@@ -30,6 +30,7 @@ TARGET_COLUMN = "target"  # change if needed
 # LOAD DATA
 # ===============================
 
+
 def load_data():
     if not DATA_PATH.exists():
         print(f"\n❌ Dataset NOT found at:\n{DATA_PATH}")
@@ -48,6 +49,7 @@ def load_data():
 # BASIC STATISTICS
 # ===============================
 
+
 def statistical_summary(df):
     print("\nGenerating statistical summary...")
 
@@ -62,15 +64,18 @@ def statistical_summary(df):
 # DATA QUALITY CHECKS
 # ===============================
 
+
 def data_quality_report(df):
     print("Checking data quality...")
 
-    report = pd.DataFrame({
-        "missing_values": df.isnull().sum(),
-        "missing_%": (df.isnull().sum() / len(df)) * 100,
-        "unique_values": df.nunique(),
-        "dtype": df.dtypes
-    })
+    report = pd.DataFrame(
+        {
+            "missing_values": df.isnull().sum(),
+            "missing_%": (df.isnull().sum() / len(df)) * 100,
+            "unique_values": df.nunique(),
+            "dtype": df.dtypes,
+        }
+    )
 
     report.to_csv(REPORT_DIR / "data_quality_report.csv")
 
@@ -84,6 +89,7 @@ def data_quality_report(df):
 # ===============================
 # FEATURE DISTRIBUTIONS
 # ===============================
+
 
 def numeric_distributions(df):
     numeric_df = df.select_dtypes(include=np.number)
@@ -104,6 +110,7 @@ def numeric_distributions(df):
 # ===============================
 # CORRELATION MATRIX
 # ===============================
+
 
 def correlation_matrix(df):
     print("Generating correlation matrix...")
@@ -127,6 +134,7 @@ def correlation_matrix(df):
 # ===============================
 # TEXT ANALYSIS (NLP Support)
 # ===============================
+
 
 def text_analysis(df):
     text_cols = df.select_dtypes(include="object").columns
@@ -152,6 +160,7 @@ def text_analysis(df):
 # CLASS IMBALANCE
 # ===============================
 
+
 def class_distribution(df):
     if TARGET_COLUMN not in df.columns:
         print(f"Target column '{TARGET_COLUMN}' not found.")
@@ -170,6 +179,7 @@ def class_distribution(df):
 # ===============================
 # FEATURE IMPORTANCE (Mutual Info)
 # ===============================
+
 
 def feature_importance(df):
     if TARGET_COLUMN not in df.columns:
@@ -208,6 +218,7 @@ def feature_importance(df):
 # ===============================
 # MAIN
 # ===============================
+
 
 def main():
     print("\n========== STARTING EDA ==========")

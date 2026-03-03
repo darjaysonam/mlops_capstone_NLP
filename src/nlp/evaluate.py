@@ -8,8 +8,7 @@ Evaluation Script
 
 import torch
 
-from src.nlp.models import (MiniLMEmbedder, MultiLabelNLPClassifier,
-                            load_zero_shot)
+from src.nlp.models import MiniLMEmbedder, MultiLabelNLPClassifier, load_zero_shot
 
 # -------------------------------------------------
 # Target Labels (Must Match training.py)

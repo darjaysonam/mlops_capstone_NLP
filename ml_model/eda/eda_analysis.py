@@ -21,16 +21,18 @@ class EDAAnalyzer:
     def statistical_summary(self):
         numeric_df = self.df.select_dtypes(include=np.number)
 
-        summary = pd.DataFrame({
-            "mean": numeric_df.mean(),
-            "median": numeric_df.median(),
-            "std": numeric_df.std(),
-            "variance": numeric_df.var(),
-            "min": numeric_df.min(),
-            "max": numeric_df.max(),
-            "skewness": numeric_df.apply(skew),
-            "kurtosis": numeric_df.apply(kurtosis)
-        })
+        summary = pd.DataFrame(
+            {
+                "mean": numeric_df.mean(),
+                "median": numeric_df.median(),
+                "std": numeric_df.std(),
+                "variance": numeric_df.var(),
+                "min": numeric_df.min(),
+                "max": numeric_df.max(),
+                "skewness": numeric_df.apply(skew),
+                "kurtosis": numeric_df.apply(kurtosis),
+            }
+        )
 
         summary.to_csv(f"{REPORT_DIR}/summary_statistics.csv")
         return summary
@@ -40,9 +42,7 @@ class EDAAnalyzer:
     # ----------------------------------------
     def analyze_missing(self):
         missing = self.df.isnull().sum().to_frame("missing_count")
-        missing["percentage"] = (
-            missing["missing_count"] / len(self.df) * 100
-        )
+        missing["percentage"] = missing["missing_count"] / len(self.df) * 100
         missing.to_csv(f"{REPORT_DIR}/missing_values.csv")
         return missing
 
@@ -69,10 +69,7 @@ class EDAAnalyzer:
     def feature_distributions(self):
         numeric_df = self.df.select_dtypes(include=np.number)
 
-        numeric_df.hist(
-            figsize=(14, 12),
-            bins=20
-        )
+        numeric_df.hist(figsize=(14, 12), bins=20)
         plt.tight_layout()
         plt.savefig(f"{REPORT_DIR}/feature_distributions.png")
         plt.close()
