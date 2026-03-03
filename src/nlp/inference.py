@@ -10,7 +10,6 @@ import torch
 import torch.nn as nn
 from sentence_transformers import SentenceTransformer
 
-
 # -------------------------------------------------
 # MultiLabelNLPClassifier
 # -------------------------------------------------
@@ -88,9 +87,7 @@ class ModelService:
 
         self.embedder = SentenceTransformer("all-MiniLM-L6-v2")
 
-        BASE_DIR = os.path.abspath(
-            os.path.join(os.path.dirname(__file__), "../../")
-        )
+        BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../"))
 
         MODEL_PATH = os.getenv(
             "MODEL_PATH",
