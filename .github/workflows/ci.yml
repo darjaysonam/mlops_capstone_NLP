@@ -70,14 +70,14 @@ jobs:
       run: |
         docker build \
           --build-arg APP_ENV=ci \
-          -t sonamkarma/fastapi-app:${{ github.sha }} \
-          -t sonamkarma/fastapi-app:latest \
+          -t darjaysonam/fastapi-app:${{ github.sha }} \
+          -t darjaysonam/fastapi-app:latest \
           .
 
     - name: Push Docker Image
       run: |
-        docker push sonamkarma/fastapi-app:${{ github.sha }}
-        docker push sonamkarma/fastapi-app:latest
+        docker push darjaysonam/fastapi-app:${{ github.sha }}
+        docker push darjaysonam/fastapi-app:latest
 
     # -------------------
     # 7️⃣ SUCCESS MESSAGE
