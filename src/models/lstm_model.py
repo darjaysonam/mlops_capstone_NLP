@@ -5,6 +5,7 @@ Lightweight for CPU training
 
 import torch.nn as nn
 
+
 class BiLSTMClassifier(nn.Module):
     def __init__(self, vocab_size, embed_dim, hidden_dim, num_classes):
         super(BiLSTMClassifier, self).__init__()
