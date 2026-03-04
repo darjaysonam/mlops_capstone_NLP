@@ -34,9 +34,7 @@ class DataPreprocessor:
 
         self.df[numeric_cols] = num_imputer.fit_transform(self.df[numeric_cols])
 
-        self.df[categorical_cols] = cat_imputer.fit_transform(
-            self.df[categorical_cols]
-        )
+        self.df[categorical_cols] = cat_imputer.fit_transform(self.df[categorical_cols])
 
         return self.df
 

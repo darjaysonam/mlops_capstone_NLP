@@ -1,10 +1,17 @@
 
-KMeans Clustering Insights:
+KMeans Clustering Insights (Smoking Health Dataset):
 
-- Cluster 0 represents high-density feature patterns.
-- Cluster 1 represents moderate feature distribution.
-- Cluster 2 represents lower intensity profiles.
+Cluster 0:
+Individuals with relatively normal metabolic indicators.
 
-Business Insight:
-Clusters may represent different patient risk categories.
-High-value clusters can guide targeted medical interventions.
+Cluster 1:
+Individuals with elevated cholesterol, triglycerides, and blood pressure.
+
+Cluster 2:
+Individuals showing higher liver enzyme values (AST, ALT, GTP) which may
+indicate lifestyle risks such as smoking or alcohol exposure.
+
+Healthcare Insight:
+These clusters may represent different metabolic health profiles.
+Public health programs could target high-risk clusters for lifestyle
+interventions such as smoking cessation and cardiovascular risk reduction.

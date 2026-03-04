@@ -1,9 +1,12 @@
 
-DBSCAN Clustering Insights:
+DBSCAN Clustering Insights (Smoking Health Dataset):
 
-- Identified core clusters and noise points.
-- Noise points may represent anomalies or rare cases.
+DBSCAN identifies dense clusters and isolates noise points.
 
-Business Insight:
-Outliers may represent rare disease patterns or data irregularities.
-Useful for anomaly detection in healthcare diagnostics.
+Noise points may represent individuals with unusual health indicators
+such as extremely high cholesterol, abnormal liver enzyme levels,
+or abnormal blood pressure.
+
+Healthcare Insight:
+Outliers may indicate individuals at extreme medical risk who may require
+clinical screening or further diagnostic evaluation.

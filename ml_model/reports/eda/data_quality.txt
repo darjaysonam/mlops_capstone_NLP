@@ -1,9 +1,0 @@
-Total rows: 7265
-Total columns: 3
-Duplicate rows: 0
-
-Missing Values:
-image_id       0
-projection     0
-org_caption    0
-dtype: int64
